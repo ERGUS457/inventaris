@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Loader2, LogIn } from "lucide-react";
+import Link from "next/link";
 
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -51,7 +52,7 @@ export function LoginForm() {
     setServerError(null);
     const supabase = createClient();
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: values.email,
       password: values.password,
     });
@@ -59,6 +60,21 @@ export function LoginForm() {
     if (error) {
       setServerError("Email atau password salah. Silakan coba lagi.");
       return;
+    }
+
+    if (data?.user) {
+      // Check verification status
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("is_verified")
+        .eq("id", data.user.id)
+        .single();
+
+      if (profile && !profile.is_verified) {
+        await supabase.auth.signOut();
+        setServerError("Akun Anda sedang menunggu verifikasi Superadmin.");
+        return;
+      }
     }
 
     // Refresh the page to let Next.js middleware handle the redirect
@@ -131,15 +147,22 @@ export function LoginForm() {
             {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Masuk...
+                Memeriksa...
               </>
             ) : (
               <>
                 <LogIn className="mr-2 h-5 w-5" />
-                Masuk
+                Masuk ke Dasbor
               </>
             )}
           </Button>
+          
+          <div className="text-center text-sm text-[#A3AED0] mt-4">
+            Belum punya akun?{" "}
+            <Link href="/register" className="font-bold text-[#4318FF] hover:underline">
+              Daftar di sini
+            </Link>
+          </div>
         </form>
       </CardContent>
     </Card>

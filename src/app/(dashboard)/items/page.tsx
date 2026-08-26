@@ -21,7 +21,8 @@ export default async function ItemsPage() {
       `
       *,
       categories ( id, name, description, created_at ),
-      locations ( id, name, created_at )
+      locations ( id, name, created_at ),
+      profiles ( email )
     `
     )
     .order("created_at", { ascending: false });

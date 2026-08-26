@@ -15,6 +15,14 @@ export type Location = {
   created_at: string;
 };
 
+export interface Profile {
+  id: string;
+  email: string;
+  role: "superadmin" | "user";
+  is_verified: boolean;
+  created_at: string;
+}
+
 export type ItemCondition = "Baik" | "Rusak" | "Perlu Perbaikan";
 
 export type Item = {
@@ -28,9 +36,11 @@ export type Item = {
   image_url: string | null;
   created_at: string;
   updated_at: string;
+  owner_id?: string;
   // Joined relations
   categories?: Category;
   locations?: Location;
+  profiles?: { email: string };
 };
 
 export type TransactionType = "masuk" | "keluar" | "mutasi";
@@ -45,8 +55,10 @@ export type Transaction = {
   created_by: string | null;
   from_location_id: string | null;
   to_location_id: string | null;
+  owner_id?: string;
   // Joined relation
   items?: Pick<Item, "id" | "name" | "item_code">;
+  profiles?: { email: string };
   from_location?: Location;
   to_location?: Location;
 };

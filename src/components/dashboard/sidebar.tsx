@@ -11,6 +11,7 @@ import {
   Boxes,
   FileText,
   MapPin,
+  Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -45,10 +46,26 @@ const navItems = [
 
 interface SidebarContentProps {
   onClose?: () => void;
+  userRole?: string;
 }
 
-export function SidebarContent({ onClose }: SidebarContentProps) {
+export function SidebarContent({ onClose, userRole }: SidebarContentProps) {
   const pathname = usePathname();
+
+  // Add superadmin routes dynamically
+  const displayedItems = [...navItems];
+  if (userRole === "superadmin") {
+    displayedItems.push({
+      href: "/users",
+      label: "Manajemen Pengguna",
+      icon: Users,
+    });
+    displayedItems.push({
+      href: "/settings",
+      label: "Pengaturan",
+      icon: Settings,
+    });
+  }
 
   return (
     <div className="flex h-full flex-col bg-white text-[#2B3674] shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)]">
@@ -73,11 +90,8 @@ export function SidebarContent({ onClose }: SidebarContentProps) {
 
       {/* ── Navigation ─────────────────────────────────────── */}
       <nav className="flex-1 px-4 py-8 space-y-2">
-        {navItems.map((item) => {
-          const isActive =
-            item.href === "/"
-              ? pathname === "/"
-              : pathname.startsWith(item.href);
+        {displayedItems.map((item) => {
+          const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
 
           return (
             <Link
@@ -112,10 +126,10 @@ export function SidebarContent({ onClose }: SidebarContentProps) {
   );
 }
 
-export function Sidebar() {
+export function Sidebar({ userRole }: { userRole?: string }) {
   return (
     <aside className="hidden md:flex w-72 flex-col fixed inset-y-0 left-0 z-30 bg-white">
-      <SidebarContent />
+      <SidebarContent userRole={userRole} />
     </aside>
   );
 }

@@ -43,7 +43,8 @@ export default async function TransactionsPage() {
       to_location_id,
       items ( id, name, item_code ),
       from_location:locations!transactions_from_location_id_fkey(name),
-      to_location:locations!transactions_to_location_id_fkey(name)
+      to_location:locations!transactions_to_location_id_fkey(name),
+      profiles ( email )
     `
     )
     .order("transaction_date", { ascending: false });

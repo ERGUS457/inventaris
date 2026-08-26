@@ -20,17 +20,30 @@ export default async function DashboardLayout({
     redirect("/login");
   }
 
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", user.id)
+    .single();
+
+  if (profile && !profile.is_verified) {
+    await supabase.auth.signOut();
+    redirect("/login?error=not_verified");
+  }
+
+  const userRole = profile?.role || "user";
+
   return (
     <div className="min-h-screen bg-[#F4F7FE] print:bg-white text-[#2B3674] font-sans">
       {/* Fixed sidebar (desktop) */}
       <div className="print:hidden">
-        <Sidebar />
+        <Sidebar userRole={userRole} />
       </div>
 
       {/* Main area shifted right on md+ */}
       <div className="md:pl-72 flex flex-col min-h-screen print:pl-0">
         <div className="print:hidden">
-          <Header userEmail={user.email ?? "Pengguna"} />
+          <Header userEmail={user.email ?? "Pengguna"} userRole={userRole} />
         </div>
         <main className="flex-1 p-6 md:p-8 lg:p-10 print:p-0 print:m-0">{children}</main>
       </div>

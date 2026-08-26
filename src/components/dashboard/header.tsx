@@ -18,9 +18,10 @@ import { SidebarContent } from "./sidebar";
 
 interface HeaderProps {
   userEmail: string;
+  userRole?: string;
 }
 
-export function Header({ userEmail }: HeaderProps) {
+export function Header({ userEmail, userRole }: HeaderProps) {
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -48,13 +49,13 @@ export function Header({ userEmail }: HeaderProps) {
                 className="md:hidden text-[#2B3674] hover:bg-white/60"
               >
                 <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle Sidebar</span>
+                <span className="sr-only">Toggle menu</span>
               </Button>
             }
           />
-          <SheetContent side="left" className="w-72 p-0 border-r-0 rounded-r-3xl overflow-hidden">
-            <SheetTitle className="sr-only">Navigasi Utama</SheetTitle>
-            <SidebarContent onClose={() => setMobileOpen(false)} />
+          <SheetContent side="left" className="p-0 w-72 border-none">
+            <SheetTitle className="sr-only">Menu Navigasi</SheetTitle>
+            <SidebarContent onClose={() => setMobileOpen(false)} userRole={userRole} />
           </SheetContent>
         </Sheet>
         {/* Placeholder for Breadcrumbs if needed */}

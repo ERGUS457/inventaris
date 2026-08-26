@@ -53,6 +53,7 @@ export function UsersTable({ initialData, currentUserId }: UsersTableProps) {
           <TableHeader>
             <TableRow className="border-b border-gray-100">
               <TableHead className="font-bold text-[#A3AED0]">Email</TableHead>
+              <TableHead className="font-bold text-[#A3AED0]">Perusahaan</TableHead>
               <TableHead className="font-bold text-[#A3AED0]">Terdaftar Pada</TableHead>
               <TableHead className="font-bold text-[#A3AED0]">Role</TableHead>
               <TableHead className="font-bold text-[#A3AED0]">Akses Superadmin</TableHead>
@@ -67,6 +68,9 @@ export function UsersTable({ initialData, currentUserId }: UsersTableProps) {
                   {profile.id === currentUserId && (
                     <span className="ml-2 text-xs font-normal text-[#A3AED0]">(Anda)</span>
                   )}
+                </TableCell>
+                <TableCell className="text-[#2B3674] font-medium">
+                  {profile.company_name || "-"}
                 </TableCell>
                 <TableCell className="text-[#2B3674] font-medium">
                   {format(new Date(profile.created_at), "dd MMM yyyy, HH:mm", { locale: id })}
@@ -108,7 +112,7 @@ export function UsersTable({ initialData, currentUserId }: UsersTableProps) {
             
             {initialData.length === 0 && (
               <TableRow>
-                <TableCell colSpan={5} className="h-24 text-center text-[#A3AED0]">
+                <TableCell colSpan={6} className="h-24 text-center text-[#A3AED0]">
                   Belum ada pengguna terdaftar.
                 </TableCell>
               </TableRow>

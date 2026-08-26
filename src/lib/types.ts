@@ -20,6 +20,7 @@ export interface Profile {
   email: string;
   role: "superadmin" | "user";
   is_verified: boolean;
+  company_name?: string | null;
   created_at: string;
 }
 

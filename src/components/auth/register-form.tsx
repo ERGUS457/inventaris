@@ -22,6 +22,9 @@ import { Input } from "@/components/ui/input";
 import { createClient } from "@/lib/supabase/client";
 
 const formSchema = z.object({
+  company_name: z.string().min(2, {
+    message: "Nama Perusahaan minimal 2 karakter.",
+  }),
   email: z.string().email({
     message: "Email tidak valid.",
   }),
@@ -37,6 +40,7 @@ export function RegisterForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      company_name: "",
       email: "",
       password: "",
     },
@@ -49,6 +53,11 @@ export function RegisterForm() {
     const { error } = await supabase.auth.signUp({
       email: values.email,
       password: values.password,
+      options: {
+        data: {
+          company_name: values.company_name,
+        },
+      },
     });
 
     setIsLoading(false);
@@ -65,6 +74,23 @@ export function RegisterForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <FormField
+          control={form.control}
+          name="company_name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-[#2B3674] font-bold">Nama Perusahaan</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="PT Maju Bersama"
+                  {...field}
+                  className="border-[#F4F7FE] bg-slate-50 focus-visible:ring-[#4318FF]"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="email"

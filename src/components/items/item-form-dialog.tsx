@@ -84,7 +84,6 @@ export function ItemFormDialog({
   const router = useRouter();
   const [open, setOpen] = useState(defaultOpen);
   const [isPending, startTransition] = useTransition();
-  const [serverError, setServerError] = useState<string | null>(null);
 
   const isEditMode = !!item;
 
@@ -102,7 +101,6 @@ export function ItemFormDialog({
   });
 
   async function onSubmit(values: ItemFormValues) {
-    setServerError(null);
     const supabase = createClient();
 
     startTransition(async () => {
@@ -131,9 +129,15 @@ export function ItemFormDialog({
       }
 
       if (error) {
-        setServerError(error.message);
+        toast.error(`Gagal ${isEditMode ? "memperbarui" : "menambah"} aset`, {
+          description: error.message,
+        });
         return;
       }
+
+      toast.success(`Aset berhasil ${isEditMode ? "diperbarui" : "ditambahkan"}`, {
+        description: payload.name,
+      });
 
       setOpen(false);
       form.reset();
@@ -153,7 +157,6 @@ export function ItemFormDialog({
         condition: item?.condition ?? "Baik",
         image_url: item?.image_url ?? "",
       });
-      setServerError(null);
     }
     setOpen(next);
     if (!next && onClose) onClose();
@@ -348,12 +351,7 @@ export function ItemFormDialog({
               )}
             />
 
-            {/* Server error */}
-            {serverError && (
-              <div className="rounded-md bg-destructive/10 border border-destructive/30 px-4 py-3">
-                <p className="text-sm text-destructive">{serverError}</p>
-              </div>
-            )}
+            {/* No server error block, using toast now */}
 
             <DialogFooter className="pt-2">
               <Button

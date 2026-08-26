@@ -28,7 +28,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    "src/proxy.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "horizon-next-1.0.0"]
 }

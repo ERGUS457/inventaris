@@ -21,6 +21,8 @@ export const metadata: Metadata = {
     "Sistem pencatatan dan manajemen aset inventaris perusahaan",
 };
 
+import { Toaster } from "@/components/ui/sonner";
+
 export default function RootLayout({
   children,
 }: {
@@ -32,6 +34,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans bg-slate-50/50`}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );

@@ -21,7 +21,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { transferItem } from "@/app/actions/mutasi";
-import { ArrowRightLeft } from "lucide-react";
+import { ArrowRightLeft, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 interface MutasiDialogProps {
   item: Item;
@@ -59,7 +60,9 @@ export function MutasiDialog({ item, locations, isOpen, onOpenChange }: MutasiDi
 
     if (result.error) {
       setError(result.error);
+      toast.error("Gagal melakukan mutasi", { description: result.error });
     } else {
+      toast.success("Mutasi berhasil", { description: `${item.name} berhasil dipindahkan.` });
       onOpenChange(false);
       // Reset form
       setToLocationId("");
@@ -84,7 +87,10 @@ export function MutasiDialog({ item, locations, isOpen, onOpenChange }: MutasiDi
         <div className="grid gap-6 py-4">
           <div className="flex flex-col space-y-1.5">
             <Label className="text-[#2B3674] font-bold text-sm">Lokasi Tujuan</Label>
-            <Select value={toLocationId} onValueChange={setToLocationId}>
+            <Select
+              value={toLocationId}
+              onValueChange={(v) => setToLocationId(v || "")}
+            >
               <SelectTrigger className="border-[#F4F7FE] bg-slate-50 focus:ring-[#4318FF]">
                 <SelectValue placeholder="Pilih Gudang/Lokasi Baru">
                   {toLocationId 

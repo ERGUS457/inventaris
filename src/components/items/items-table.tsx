@@ -35,6 +35,7 @@ import {
 import { ItemFormDialog } from "./item-form-dialog";
 import { MutasiDialog } from "./mutasi-dialog";
 import { ItemDistributionDialog } from "./item-distribution-dialog";
+import { toast } from "sonner";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -77,7 +78,18 @@ export function ItemsTable({ items, categories, locations }: ItemsTableProps) {
     if (!deleteTarget) return;
     const supabase = createClient();
     startTransition(async () => {
-      await supabase.from("items").delete().eq("id", deleteTarget.id);
+      const { error } = await supabase.from("items").delete().eq("id", deleteTarget.id);
+      
+      if (error) {
+        toast.error("Gagal menghapus aset", {
+          description: error.message,
+        });
+      } else {
+        toast.success("Aset berhasil dihapus", {
+          description: `${deleteTarget.name} telah dihapus dari sistem.`,
+        });
+      }
+      
       setDeleteTarget(null);
       router.refresh();
     });

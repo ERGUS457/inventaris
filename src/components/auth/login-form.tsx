@@ -64,20 +64,28 @@ export function LoginForm() {
 
     if (data?.user) {
       // Check verification status and role
-      const { data: profile } = await supabase
+      const { data: profile, error: profileError } = await supabase
         .from("profiles")
         .select("is_verified, role")
         .eq("id", data.user.id)
         .single();
 
-      if (profile && !profile.is_verified) {
+      // If profile doesn't exist or query failed, block login
+      if (!profile || profileError) {
         await supabase.auth.signOut();
-        setServerError("Akun Anda sedang menunggu verifikasi Superadmin.");
+        setServerError("Akun Anda belum terdaftar di sistem. Silakan hubungi Superadmin.");
+        return;
+      }
+
+      // If not verified, block login
+      if (!profile.is_verified) {
+        await supabase.auth.signOut();
+        setServerError("Akun Anda sedang menunggu verifikasi dari Superadmin. Silakan tunggu hingga akun Anda disetujui.");
         return;
       }
 
       // Redirect based on role
-      if (profile?.role === "superadmin") {
+      if (profile.role === "superadmin") {
         router.push("/superadmin");
       } else {
         router.push("/dashboard");

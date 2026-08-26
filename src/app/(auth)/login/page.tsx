@@ -9,21 +9,21 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 px-4">
+    <main className="min-h-screen flex flex-col items-center justify-center bg-slate-50 px-4">
       {/* Brand */}
-      <div className="flex items-center gap-3 mb-8">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-          <Package className="h-6 w-6" />
+      <div className="flex items-center gap-3 mb-10">
+        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 shadow-md shadow-blue-600/20">
+          <Package className="h-7 w-7 text-white" />
         </div>
         <div>
-          <h1 className="text-xl font-bold leading-none">Inventaris</h1>
-          <p className="text-xs text-muted-foreground">Manajemen Aset</p>
+          <h1 className="text-2xl font-bold leading-none tracking-tight text-slate-800">Inventaris</h1>
+          <p className="text-sm font-medium text-slate-500 mt-1">Asset Management</p>
         </div>
       </div>
 
       <LoginForm />
 
-      <p className="mt-6 text-xs text-muted-foreground">
+      <p className="mt-8 text-sm font-medium text-slate-400">
         &copy; {new Date().getFullYear()} Aplikasi Pencatatan Inventaris
       </p>
     </main>

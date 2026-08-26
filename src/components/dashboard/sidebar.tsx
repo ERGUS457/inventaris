@@ -1,0 +1,121 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  LayoutDashboard,
+  Package,
+  Settings,
+  ClipboardList,
+  X,
+  Boxes,
+  FileText,
+  MapPin,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+
+const navItems = [
+  {
+    href: "/",
+    label: "Dashboard",
+    icon: LayoutDashboard,
+  },
+  {
+    href: "/items",
+    label: "Data Aset",
+    icon: Package,
+  },
+  {
+    href: "/locations",
+    label: "Peta Lokasi",
+    icon: MapPin,
+  },
+  {
+    href: "/transactions",
+    label: "Transaksi",
+    icon: ClipboardList,
+  },
+  {
+    href: "/reports",
+    label: "Laporan",
+    icon: FileText,
+  },
+];
+
+interface SidebarContentProps {
+  onClose?: () => void;
+}
+
+export function SidebarContent({ onClose }: SidebarContentProps) {
+  const pathname = usePathname();
+
+  return (
+    <div className="flex h-full flex-col bg-white text-[#2B3674] shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)]">
+      {/* ── Logo Header ────────────────────────────────────── */}
+      <div className="flex items-center justify-center px-6 py-10 border-b border-[#F4F7FE]">
+        <div className="flex items-center gap-2 uppercase">
+          <p className="font-black text-2xl tracking-tighter text-[#2B3674]">
+            INVENTARIS<span className="font-medium"> APP</span>
+          </p>
+        </div>
+        {onClose && (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onClose}
+            className="md:hidden text-[#A3AED0] hover:text-[#2B3674] hover:bg-[#F4F7FE] absolute right-4"
+          >
+            <X className="h-5 w-5" />
+          </Button>
+        )}
+      </div>
+
+      {/* ── Navigation ─────────────────────────────────────── */}
+      <nav className="flex-1 px-4 py-8 space-y-2">
+        {navItems.map((item) => {
+          const isActive =
+            item.href === "/"
+              ? pathname === "/"
+              : pathname.startsWith(item.href);
+
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={onClose}
+              className={cn(
+                "group flex items-center gap-3 rounded-lg px-3 py-3 text-base font-bold transition-all duration-200",
+                isActive
+                  ? "text-[#4318FF] bg-[#F4F7FE]"
+                  : "text-[#A3AED0] hover:text-[#2B3674] hover:bg-[#F4F7FE]"
+              )}
+            >
+              <div
+                className={cn(
+                  "flex items-center justify-center transition-all",
+                  isActive ? "text-[#4318FF]" : "text-[#A3AED0]"
+                )}
+              >
+                <item.icon className="h-5 w-5" />
+              </div>
+              <p>{item.label}</p>
+              {isActive && (
+                <div className="absolute right-0 h-9 w-1 rounded-l-lg bg-[#4318FF]" />
+              )}
+            </Link>
+          );
+        })}
+      </nav>
+
+    </div>
+  );
+}
+
+export function Sidebar() {
+  return (
+    <aside className="hidden md:flex w-72 flex-col fixed inset-y-0 left-0 z-30 bg-white">
+      <SidebarContent />
+    </aside>
+  );
+}

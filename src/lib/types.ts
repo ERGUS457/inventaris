@@ -33,7 +33,7 @@ export type Item = {
   locations?: Location;
 };
 
-export type TransactionType = "masuk" | "keluar";
+export type TransactionType = "masuk" | "keluar" | "mutasi";
 
 export type Transaction = {
   id: string;
@@ -43,8 +43,12 @@ export type Transaction = {
   notes: string | null;
   transaction_date: string;
   created_by: string | null;
+  from_location_id: string | null;
+  to_location_id: string | null;
   // Joined relation
   items?: Pick<Item, "id" | "name" | "item_code">;
+  from_location?: Location;
+  to_location?: Location;
 };
 
 // ──────────────────────────────────────────────────────────────────────────────

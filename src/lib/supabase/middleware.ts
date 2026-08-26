@@ -38,18 +38,19 @@ export async function updateSession(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
   const isAuthRoute = pathname.startsWith("/login") || pathname.startsWith("/register");
+  const isPublicRoute = pathname === "/";
 
-  // If the user is not signed in and the route is protected, redirect to login
-  if (!user && !isAuthRoute) {
+  // If the user is not signed in and tries to access a protected route
+  if (!user && !isAuthRoute && !isPublicRoute) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     return NextResponse.redirect(url);
   }
 
-  // If the user is signed in and tries to access the login page, redirect to dashboard
-  if (user && isAuthRoute) {
+  // If the user is signed in and visits login/register, or the landing page, redirect to dashboard
+  if (user && (isAuthRoute || isPublicRoute)) {
     const url = request.nextUrl.clone();
-    url.pathname = "/";
+    url.pathname = "/dashboard";
     return NextResponse.redirect(url);
   }
 

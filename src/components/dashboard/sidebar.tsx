@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 
 const navItems = [
   {
-    href: "/",
+    href: "/dashboard",
     label: "Dashboard",
     icon: LayoutDashboard,
   },
@@ -91,7 +91,7 @@ export function SidebarContent({ onClose, userRole }: SidebarContentProps) {
       {/* ── Navigation ─────────────────────────────────────── */}
       <nav className="flex-1 px-4 py-8 space-y-2">
         {displayedItems.map((item) => {
-          const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+          const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
 
           return (
             <Link

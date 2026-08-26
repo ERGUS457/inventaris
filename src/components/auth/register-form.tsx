@@ -67,6 +67,20 @@ export function RegisterForm() {
       return;
     }
 
+    // Kirim notifikasi email ke Superadmin
+    try {
+      await fetch("/api/notify-admin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: values.email,
+          companyName: values.company_name,
+        }),
+      });
+    } catch {
+      // Jangan block proses registrasi jika notifikasi gagal
+    }
+
     toast.success("Pendaftaran berhasil!", { description: "Akun Anda sedang menunggu verifikasi dari Superadmin." });
     router.push("/login?registered=true");
   }

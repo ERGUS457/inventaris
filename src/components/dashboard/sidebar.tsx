@@ -53,19 +53,15 @@ export function SidebarContent({ onClose, userRole }: SidebarContentProps) {
   const pathname = usePathname();
 
   // Add superadmin routes dynamically
-  const displayedItems = [...navItems];
-  if (userRole === "superadmin") {
-    displayedItems.push({
-      href: "/users",
-      label: "Manajemen Pengguna",
-      icon: Users,
-    });
-    displayedItems.push({
-      href: "/settings",
-      label: "Pengaturan",
-      icon: Settings,
-    });
-  }
+  const displayedItems = userRole === "superadmin"
+    ? [
+        { href: "/superadmin", label: "Pusat Kendali", icon: LayoutDashboard },
+        { href: "/superadmin/companies", label: "Pantau Perusahaan", icon: MapPin },
+        { href: "/superadmin/reports", label: "Laporan Global", icon: FileText },
+        { href: "/users", label: "Kelola Pengguna", icon: Users },
+        { href: "/settings", label: "Pengaturan", icon: Settings },
+      ]
+    : [...navItems];
 
   return (
     <div className="flex h-full flex-col bg-white text-[#2B3674] shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)]">

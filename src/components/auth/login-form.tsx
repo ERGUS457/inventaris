@@ -63,10 +63,10 @@ export function LoginForm() {
     }
 
     if (data?.user) {
-      // Check verification status
+      // Check verification status and role
       const { data: profile } = await supabase
         .from("profiles")
-        .select("is_verified")
+        .select("is_verified, role")
         .eq("id", data.user.id)
         .single();
 
@@ -75,10 +75,18 @@ export function LoginForm() {
         setServerError("Akun Anda sedang menunggu verifikasi Superadmin.");
         return;
       }
+
+      // Redirect based on role
+      if (profile?.role === "superadmin") {
+        router.push("/superadmin");
+      } else {
+        router.push("/dashboard");
+      }
+      router.refresh();
+      return;
     }
 
-    // Refresh the page to let Next.js middleware handle the redirect
-    router.push("/");
+    router.push("/dashboard");
     router.refresh();
   }
 

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Package, ShieldCheck, ArrowRight, BarChart3, LayoutDashboard, Database } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -10,11 +11,9 @@ export default function LandingPage() {
       <header className="sticky top-0 z-50 w-full backdrop-blur-xl bg-white/60 dark:bg-[#111c44]/60 border-b border-white/20 dark:border-white/5">
         <div className="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-[#4318FF] shadow-md shadow-[#4318FF]/20">
-              <Package className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-            </div>
+            <Image src="/logo-icon.png" alt="Tracely" width={32} height={32} className="object-contain" />
             <p className="font-black text-xl sm:text-2xl tracking-tighter text-[#2B3674] dark:text-white uppercase">
-              INVENTARIS<span className="font-medium hidden sm:inline"> APP</span>
+              Tracely
             </p>
           </div>
           <div className="flex items-center gap-2 sm:gap-4">
@@ -111,13 +110,13 @@ export default function LandingPage() {
       {/* ── Footer ─────────────────────────────────────────── */}
       <footer className="bg-[#2B3674] dark:bg-[#0b1437] py-12 text-center text-white/70 border-t border-white/5">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <Package className="h-6 w-6 text-[#4318FF]" />
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <Image src="/logo-icon.png" alt="Tracely" width={24} height={24} className="object-contain" />
             <p className="font-black text-xl tracking-tighter text-white uppercase">
-              INVENTARIS<span className="font-medium"> APP</span>
+              Tracely
             </p>
           </div>
-          <p>© {new Date().getFullYear()} Aplikasi Pencatatan Inventaris. Dibangun dengan Next.js & Supabase.</p>
+          <p>© {new Date().getFullYear()} Tracely. Dibangun dengan Next.js & Supabase.</p>
         </div>
       </footer>
     </div>

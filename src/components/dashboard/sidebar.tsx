@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
@@ -66,10 +67,11 @@ export function SidebarContent({ onClose, userRole }: SidebarContentProps) {
   return (
     <div className="flex h-full flex-col bg-white dark:bg-[#111c44] text-[#2B3674] dark:text-white shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)] dark:shadow-none transition-colors duration-300">
       {/* ── Logo Header ────────────────────────────────────── */}
-      <div className="flex items-center justify-center px-6 py-10 border-b border-[#F4F7FE] dark:border-white/10">
-        <div className="flex items-center gap-2 uppercase">
-          <p className="font-black text-2xl tracking-tighter text-[#2B3674] dark:text-white">
-            INVENTARIS<span className="font-medium"> APP</span>
+      <div className="flex items-center justify-center px-6 py-10 border-b border-[#F4F7FE] dark:border-white/10 relative">
+        <div className="flex items-center gap-3">
+          <Image src="/logo-icon.png" alt="Tracely" width={32} height={32} className="object-contain" />
+          <p className="font-black text-2xl tracking-tighter text-[#2B3674] dark:text-white uppercase">
+            Tracely
           </p>
         </div>
         {onClose && (

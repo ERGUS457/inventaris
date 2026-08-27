@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://inventaris-theta.vercel.app";
 
     const { error } = await resend.emails.send({
-      from: "Inventaris App <onboarding@resend.dev>",
+      from: "Tracely <onboarding@resend.dev>",
       to: superadminEmail,
       subject: `🆕 Pendaftaran Baru: ${companyName || email}`,
       html: `
@@ -28,7 +28,7 @@ export async function POST(request: Request) {
           <!-- Header -->
           <div style="background: linear-gradient(135deg, #4318FF, #868CFF); padding: 32px 24px; text-align: center;">
             <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">
-              📋 INVENTARIS APP
+              📋 TRACELY
             </h1>
             <p style="color: rgba(255,255,255,0.8); margin: 8px 0 0; font-size: 14px;">
               Notifikasi Pendaftaran Baru
@@ -74,7 +74,7 @@ export async function POST(request: Request) {
           <!-- Footer -->
           <div style="background: #F4F7FE; padding: 16px 24px; text-align: center;">
             <p style="color: #A3AED0; font-size: 11px; margin: 0;">
-              Email ini dikirim otomatis oleh Inventaris App. Jangan membalas email ini.
+              Email ini dikirim otomatis oleh Tracely. Jangan membalas email ini.
             </p>
           </div>
         </div>

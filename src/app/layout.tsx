@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Aplikasi Inventaris",
-    template: "%s — Aplikasi Inventaris",
+    default: "Tracely",
+    template: "%s — Tracely",
   },
   description:
     "Sistem pencatatan dan manajemen aset inventaris perusahaan",

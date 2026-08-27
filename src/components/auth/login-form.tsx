@@ -105,7 +105,7 @@ export function LoginForm() {
           Selamat Datang
         </CardTitle>
         <CardDescription className="text-sm font-medium text-slate-500 dark:text-slate-400">
-          Masuk ke Aplikasi Pencatatan Inventaris
+          Masuk ke Tracely
         </CardDescription>
       </CardHeader>
 

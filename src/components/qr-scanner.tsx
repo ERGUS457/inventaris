@@ -27,12 +27,9 @@ export default function QRScanner({ onScanSuccess, onClose }: QRScannerProps) {
             qrbox: { width: 250, height: 250 },
           },
           (decodedText) => {
-            // Stop scanning once we get a result
-            if (scannerRef.current?.isScanning) {
-              scannerRef.current.stop().then(() => {
-                onScanSuccess(decodedText);
-              });
-            }
+            // Langsung panggil onScanSuccess agar parent component melakukan unmount.
+            // Proses stop() akan ditangani secara otomatis oleh fungsi cleanup di useEffect.
+            onScanSuccess(decodedText.trim());
           },
           (errorMessage) => {
             // Ignore regular scanning errors (it just means no QR code in frame yet)

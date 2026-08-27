@@ -48,14 +48,16 @@ export function Header({ userEmail, userRole }: HeaderProps) {
     toast.loading("Mencari barang...", { id: "scan-toast" });
     
     const supabase = createClient();
+    const cleanText = decodedText.trim();
+    
     const { data: item, error } = await supabase
       .from("items")
       .select("*, categories(name), locations(name)")
-      .eq("item_code", decodedText)
+      .ilike("item_code", cleanText)
       .single();
       
     if (error || !item) {
-      toast.error(`Aset dengan kode ${decodedText} tidak ditemukan.`, { id: "scan-toast" });
+      toast.error(`Aset dengan kode "${cleanText}" tidak ditemukan.`, { id: "scan-toast" });
       return;
     }
     

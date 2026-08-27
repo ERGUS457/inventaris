@@ -104,8 +104,8 @@ export default async function LocationsPage() {
       </div>
       
       {safeLocations.length === 0 && !error && (
-        <div className="flex flex-col items-center justify-center py-20 text-[#A3AED0] bg-white rounded-[20px] shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)]">
-          <MapPin className="h-12 w-12 mb-4 text-slate-200" />
+        <div className="flex flex-col items-center justify-center py-20 text-[#A3AED0] dark:text-white/50 bg-white dark:bg-[#111c44] rounded-[20px] shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)] dark:shadow-none border-none">
+          <MapPin className="h-12 w-12 mb-4 text-slate-200 dark:text-white/10" />
           <p className="text-sm font-medium">Belum ada lokasi yang terdaftar.</p>
         </div>
       )}

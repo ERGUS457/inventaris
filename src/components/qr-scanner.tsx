@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Html5Qrcode } from "html5-qrcode";
 import { X, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -50,7 +51,15 @@ export default function QRScanner({ onScanSuccess, onClose }: QRScannerProps) {
     };
   }, [onScanSuccess]);
 
-  return (
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || typeof document === 'undefined') return null;
+
+  return createPortal(
     <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/90 p-4 backdrop-blur-sm">
       <div className="w-full max-w-md relative bg-white dark:bg-[#111c44] rounded-2xl overflow-hidden shadow-2xl">
         {/* Header */}
@@ -81,6 +90,7 @@ export default function QRScanner({ onScanSuccess, onClose }: QRScannerProps) {
           Arahkan kamera ke Barcode atau QR Code aset. Sistem akan membacanya secara otomatis.
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

@@ -70,6 +70,7 @@ export function Header({ userEmail, userRole }: HeaderProps) {
   }
 
   return (
+    <>
     <header className="sticky top-4 z-20 flex h-16 w-full shrink-0 items-center justify-between rounded-[20px] bg-white/40 dark:bg-[#111c44]/60 backdrop-blur-xl px-4 md:px-6 mb-8 mx-auto max-w-[calc(100%-32px)] md:max-w-[calc(100%-64px)] shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)] dark:shadow-none">
       <div className="flex items-center gap-2">
         <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
@@ -162,13 +163,14 @@ export function Header({ userEmail, userRole }: HeaderProps) {
         </DropdownMenuContent>
         </DropdownMenu>
       </div>
-
-      {showScanner && (
-        <QRScanner 
-          onScanSuccess={handleScanSuccess} 
-          onClose={() => setShowScanner(false)} 
-        />
-      )}
     </header>
+
+    {showScanner && (
+      <QRScanner 
+        onScanSuccess={handleScanSuccess} 
+        onClose={() => setShowScanner(false)} 
+      />
+    )}
+    </>
   );
 }

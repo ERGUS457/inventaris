@@ -129,14 +129,14 @@ export default async function DashboardPage() {
           {metrics.map((m) => (
             <div
               key={m.title}
-              className="flex items-center gap-4 rounded-[20px] bg-white p-5 shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)] transition-transform hover:-translate-y-1"
+              className="flex items-center gap-4 rounded-[20px] bg-white dark:bg-[#111c44] p-5 shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)] dark:shadow-none transition-transform hover:-translate-y-1"
             >
               <div className={`flex h-16 w-16 items-center justify-center rounded-full ${m.bg}`}>
                 <m.icon className={`h-8 w-8 ${m.color}`} />
               </div>
               <div>
-                <p className="text-sm font-medium text-[#A3AED0]">{m.title}</p>
-                <p className="text-2xl font-bold text-[#2B3674]">{m.value}</p>
+                <p className="text-sm font-medium text-[#A3AED0] dark:text-white/70">{m.title}</p>
+                <p className="text-2xl font-bold text-[#2B3674] dark:text-white">{m.value}</p>
               </div>
             </div>
           ))}
@@ -145,25 +145,25 @@ export default async function DashboardPage() {
 
       {/* ── Recent Transactions ───────────────────────────────── */}
       <div>
-        <h2 className="mb-5 text-xl font-bold text-[#2B3674]">
+        <h2 className="mb-4 text-xl font-bold text-[#2B3674] dark:text-white px-2">
           Transaksi Terbaru
         </h2>
 
-        <div className="overflow-hidden rounded-[20px] bg-white shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)] px-5 pb-5 pt-2">
+        <div className="overflow-hidden rounded-[20px] bg-white dark:bg-[#111c44] shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)] dark:shadow-none px-5 pb-5 pt-2">
           {transactions.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-20 text-[#A3AED0]">
-              <Package className="h-12 w-12 mb-4 text-slate-200" />
+            <div className="flex flex-col items-center justify-center py-20 text-[#A3AED0] dark:text-white/50">
+              <Package className="h-12 w-12 mb-4 text-slate-200 dark:text-white/10" />
               <p className="text-sm font-medium">Belum ada transaksi bulan ini</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
-                  <TableRow className="border-b border-[#F4F7FE] hover:bg-transparent">
-                    <TableHead className="text-[#A3AED0] font-bold py-4">Aset</TableHead>
-                    <TableHead className="text-[#A3AED0] font-bold py-4 text-center w-[100px]">Jumlah</TableHead>
-                    <TableHead className="text-[#A3AED0] font-bold py-4 hidden sm:table-cell">Catatan</TableHead>
-                    <TableHead className="text-[#A3AED0] font-bold py-4 text-right">Tipe</TableHead>
+                  <TableRow className="border-b border-[#F4F7FE] dark:border-white/5 hover:bg-transparent">
+                    <TableHead className="text-[#A3AED0] dark:text-white/70 font-bold py-4">Aset</TableHead>
+                    <TableHead className="text-[#A3AED0] dark:text-white/70 font-bold py-4 text-center w-[100px]">Jumlah</TableHead>
+                    <TableHead className="text-[#A3AED0] dark:text-white/70 font-bold py-4 hidden sm:table-cell">Catatan</TableHead>
+                    <TableHead className="text-[#A3AED0] dark:text-white/70 font-bold py-4 text-right">Tipe</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -172,11 +172,11 @@ export default async function DashboardPage() {
                     const isMutasi = tx.transaction_type === "mutasi";
                     
                     return (
-                      <TableRow key={tx.id} className="border-b border-[#F4F7FE] hover:bg-[#F4F7FE]/50 transition-colors">
-                        <TableCell className="font-bold text-[#2B3674] py-4">
+                      <TableRow key={tx.id} className="border-b border-[#F4F7FE] dark:border-white/5 hover:bg-[#F4F7FE]/50 dark:hover:bg-white/5 transition-colors">
+                        <TableCell className="font-bold text-[#2B3674] dark:text-white py-4">
                           {tx.items?.name ?? "—"}
                         </TableCell>
-                        <TableCell className="text-center font-bold text-[#2B3674] py-4">
+                        <TableCell className="text-center font-bold text-[#2B3674] dark:text-white py-4">
                           {tx.quantity}
                         </TableCell>
                         <TableCell className="text-[#A3AED0] text-sm font-medium max-w-[200px] truncate hidden sm:table-cell py-4">

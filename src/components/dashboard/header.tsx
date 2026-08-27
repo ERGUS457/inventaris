@@ -16,7 +16,9 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { SidebarContent } from "./sidebar";
 
-interface HeaderProps {
+import { ThemeToggle } from "@/components/theme-toggle";
+
+export interface HeaderProps {
   userEmail: string;
   userRole?: string;
 }
@@ -38,7 +40,7 @@ export function Header({ userEmail, userRole }: HeaderProps) {
   }
 
   return (
-    <header className="sticky top-4 z-20 flex h-16 w-full shrink-0 items-center justify-between rounded-[20px] bg-white/40 backdrop-blur-xl px-4 md:px-6 mb-8 mx-auto max-w-[calc(100%-32px)] md:max-w-[calc(100%-64px)] shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)]">
+    <header className="sticky top-4 z-20 flex h-16 w-full shrink-0 items-center justify-between rounded-[20px] bg-white/40 dark:bg-[#111c44]/60 backdrop-blur-xl px-4 md:px-6 mb-8 mx-auto max-w-[calc(100%-32px)] md:max-w-[calc(100%-64px)] shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)] dark:shadow-none">
       <div className="flex items-center gap-2">
         <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
           <SheetTrigger 
@@ -46,7 +48,7 @@ export function Header({ userEmail, userRole }: HeaderProps) {
               <Button
                 variant="ghost"
                 size="icon"
-                className="md:hidden text-[#2B3674] hover:bg-white/60"
+                className="md:hidden text-[#2B3674] dark:text-white hover:bg-white/60 dark:hover:bg-white/10"
               >
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">Toggle menu</span>
@@ -59,7 +61,7 @@ export function Header({ userEmail, userRole }: HeaderProps) {
           </SheetContent>
         </Sheet>
         {/* Placeholder for Breadcrumbs if needed */}
-        <p className="text-[#2B3674] font-bold text-sm hidden md:block tracking-wide">
+        <p className="text-[#2B3674] dark:text-white font-bold text-sm hidden md:block tracking-wide">
           Pages / <span className="text-[#4318FF]">Dashboard</span>
         </p>
       </div>
@@ -67,13 +69,17 @@ export function Header({ userEmail, userRole }: HeaderProps) {
       {/* Spacer */}
       <div className="flex-1" />
 
-      {/* User menu */}
-      <DropdownMenu>
-        <DropdownMenuTrigger
-          render={
-            <button className="group relative flex h-10 w-10 items-center justify-center rounded-full p-[2px] bg-blue-100 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-transform hover:scale-105" />
-          }
-        >
+      <div className="flex items-center gap-4">
+        {/* Theme Toggle */}
+        <ThemeToggle />
+
+        {/* User menu */}
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            render={
+              <button className="group relative flex h-10 w-10 items-center justify-center rounded-full p-[2px] bg-blue-100 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-transform hover:scale-105" />
+            }
+          >
           <div className="h-full w-full rounded-full border-2 border-white p-[1px]">
             <Avatar className="h-full w-full">
               <AvatarFallback className="bg-blue-600 text-white text-xs font-bold">
@@ -111,7 +117,8 @@ export function Header({ userEmail, userRole }: HeaderProps) {
             <span className="font-medium">Keluar</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
-      </DropdownMenu>
+        </DropdownMenu>
+      </div>
     </header>
   );
 }

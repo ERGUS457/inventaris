@@ -64,11 +64,11 @@ export function SidebarContent({ onClose, userRole }: SidebarContentProps) {
     : [...navItems];
 
   return (
-    <div className="flex h-full flex-col bg-white text-[#2B3674] shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)]">
+    <div className="flex h-full flex-col bg-white dark:bg-[#111c44] text-[#2B3674] dark:text-white shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)] dark:shadow-none transition-colors duration-300">
       {/* ── Logo Header ────────────────────────────────────── */}
-      <div className="flex items-center justify-center px-6 py-10 border-b border-[#F4F7FE]">
+      <div className="flex items-center justify-center px-6 py-10 border-b border-[#F4F7FE] dark:border-white/10">
         <div className="flex items-center gap-2 uppercase">
-          <p className="font-black text-2xl tracking-tighter text-[#2B3674]">
+          <p className="font-black text-2xl tracking-tighter text-[#2B3674] dark:text-white">
             INVENTARIS<span className="font-medium"> APP</span>
           </p>
         </div>
@@ -77,7 +77,7 @@ export function SidebarContent({ onClose, userRole }: SidebarContentProps) {
             variant="ghost"
             size="icon"
             onClick={onClose}
-            className="md:hidden text-[#A3AED0] hover:text-[#2B3674] hover:bg-[#F4F7FE] absolute right-4"
+            className="md:hidden text-[#A3AED0] dark:text-white/70 hover:text-[#2B3674] dark:hover:text-white hover:bg-[#F4F7FE] dark:hover:bg-white/10 absolute right-4"
           >
             <X className="h-5 w-5" />
           </Button>
@@ -97,14 +97,14 @@ export function SidebarContent({ onClose, userRole }: SidebarContentProps) {
               className={cn(
                 "group flex items-center gap-3 rounded-lg px-3 py-3 text-base font-bold transition-all duration-200",
                 isActive
-                  ? "text-[#4318FF] bg-[#F4F7FE]"
-                  : "text-[#A3AED0] hover:text-[#2B3674] hover:bg-[#F4F7FE]"
+                  ? "text-[#4318FF] dark:text-white bg-[#F4F7FE] dark:bg-white/10"
+                  : "text-[#A3AED0] dark:text-white/60 hover:text-[#2B3674] dark:hover:text-white hover:bg-[#F4F7FE] dark:hover:bg-white/5"
               )}
             >
               <div
                 className={cn(
                   "flex items-center justify-center transition-all",
-                  isActive ? "text-[#4318FF]" : "text-[#A3AED0]"
+                  isActive ? "text-[#4318FF] dark:text-white" : "text-[#A3AED0] dark:text-white/60"
                 )}
               >
                 <item.icon className="h-5 w-5" />

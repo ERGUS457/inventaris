@@ -99,12 +99,12 @@ export function LoginForm() {
   }
 
   return (
-    <Card className="w-full max-w-md shadow-lg border-0 ring-1 ring-slate-200">
-      <CardHeader className="space-y-2 pb-6 pt-8">
-        <CardTitle className="text-3xl font-extrabold text-center text-slate-800">
+    <Card className="w-full max-w-[420px] rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-none border-0 ring-1 ring-slate-100 dark:ring-white/10 dark:bg-[#111c44]">
+      <CardHeader className="space-y-2 pb-6 pt-8 text-center">
+        <CardTitle className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
           Selamat Datang
         </CardTitle>
-        <CardDescription className="text-center text-base font-medium text-slate-500">
+        <CardDescription className="text-sm font-medium text-slate-500 dark:text-slate-400">
           Masuk ke Aplikasi Pencatatan Inventaris
         </CardDescription>
       </CardHeader>
@@ -113,14 +113,14 @@ export function LoginForm() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {/* Email */}
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-sm font-bold text-slate-700">Email</Label>
+            <Label htmlFor="email" className="text-sm font-bold text-slate-700 dark:text-slate-300">Email</Label>
             <Input
               id="email"
               type="email"
               placeholder="admin@perusahaan.com"
               autoComplete="email"
               disabled={isSubmitting}
-              className="h-11 bg-slate-50 border-slate-200 focus-visible:ring-blue-600 focus-visible:border-blue-600"
+              className="h-11 bg-slate-50 dark:bg-[#0b1437] border-slate-200 dark:border-white/10 dark:text-white focus-visible:ring-blue-600 focus-visible:border-blue-600"
               {...register("email")}
             />
             {errors.email && (
@@ -130,14 +130,14 @@ export function LoginForm() {
 
           {/* Password */}
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-sm font-bold text-slate-700">Password</Label>
+            <Label htmlFor="password" className="text-sm font-bold text-slate-700 dark:text-slate-300">Password</Label>
             <Input
               id="password"
               type="password"
               placeholder="••••••••"
               autoComplete="current-password"
               disabled={isSubmitting}
-              className="h-11 bg-slate-50 border-slate-200 focus-visible:ring-blue-600 focus-visible:border-blue-600"
+              className="h-11 bg-slate-50 dark:bg-[#0b1437] border-slate-200 dark:border-white/10 dark:text-white focus-visible:ring-blue-600 focus-visible:border-blue-600"
               {...register("password")}
             />
             {errors.password && (

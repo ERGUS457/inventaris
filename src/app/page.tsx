@@ -9,22 +9,22 @@ export default function LandingPage() {
       <header className="sticky top-0 z-50 w-full backdrop-blur-xl bg-white/60 border-b border-white/20">
         <div className="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#4318FF] shadow-md shadow-[#4318FF]/20">
-              <Package className="h-6 w-6 text-white" />
+            <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-[#4318FF] shadow-md shadow-[#4318FF]/20">
+              <Package className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
             </div>
-            <p className="font-black text-2xl tracking-tighter text-[#2B3674] uppercase">
-              INVENTARIS<span className="font-medium"> APP</span>
+            <p className="font-black text-xl sm:text-2xl tracking-tighter text-[#2B3674] uppercase">
+              INVENTARIS<span className="font-medium hidden sm:inline"> APP</span>
             </p>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Link href="/login">
-              <Button variant="ghost" className="text-[#2B3674] font-bold hover:bg-[#E9EDF7]">
+              <Button variant="ghost" className="text-[#2B3674] px-2 sm:px-4 font-bold hover:bg-[#E9EDF7]">
                 Masuk
               </Button>
             </Link>
             <Link href="/register">
-              <Button className="bg-[#4318FF] hover:bg-[#3311DB] text-white rounded-full px-6 font-bold shadow-lg shadow-[#4318FF]/25">
-                Mulai Gratis
+              <Button className="bg-[#4318FF] hover:bg-[#3311DB] text-white rounded-full px-4 sm:px-6 font-bold shadow-lg shadow-[#4318FF]/25">
+                Mulai
               </Button>
             </Link>
           </div>
@@ -32,28 +32,28 @@ export default function LandingPage() {
       </header>
 
       {/* ── Hero Section ───────────────────────────────────── */}
-      <section className="relative pt-20 pb-32 overflow-hidden">
+      <section className="relative pt-12 sm:pt-20 pb-20 sm:pb-32 overflow-hidden">
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white text-[#4318FF] text-sm font-bold shadow-sm mb-6 border border-white/50">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white text-[#4318FF] text-xs sm:text-sm font-bold shadow-sm mb-6 border border-white/50">
             <span className="flex h-2 w-2 rounded-full bg-[#4318FF] animate-pulse" />
-            Sistem Multi-Perusahaan Tersedia Sekarang!
+            <span className="truncate max-w-[200px] sm:max-w-none">Sistem Multi-Perusahaan Tersedia Sekarang!</span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-extrabold text-[#2B3674] tracking-tight mb-6 max-w-4xl mx-auto leading-tight">
-            Kelola Inventaris Perusahaan Anda <br className="hidden md:block" />
-            <span className="text-[#4318FF]">Lebih Cerdas & Aman</span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-[#2B3674] tracking-tight mb-6 max-w-4xl mx-auto leading-tight">
+            Kelola Inventaris <br className="hidden md:block" /> Perusahaan Anda <br className="block md:hidden" />
+            <span className="text-[#4318FF]">Lebih Cerdas</span>
           </h1>
-          <p className="text-lg md:text-xl text-[#A3AED0] mb-10 max-w-2xl mx-auto font-medium">
+          <p className="text-base sm:text-lg md:text-xl text-[#A3AED0] mb-8 sm:mb-10 max-w-2xl mx-auto font-medium px-2">
             Platform modern untuk melacak, mengelola, dan memantau seluruh aset fisik maupun digital perusahaan Anda secara real-time.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/register">
-              <Button className="h-14 bg-[#4318FF] hover:bg-[#3311DB] text-white rounded-full px-8 text-lg font-bold shadow-[0_10px_40px_-10px_rgba(67,24,255,0.7)] group">
-                Buat Akun Perusahaan
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full px-4 sm:px-0">
+            <Link href="/register" className="w-full sm:w-auto">
+              <Button className="w-full sm:w-auto h-12 sm:h-14 bg-[#4318FF] hover:bg-[#3311DB] text-white rounded-full px-6 sm:px-8 text-base sm:text-lg font-bold shadow-[0_10px_40px_-10px_rgba(67,24,255,0.7)] group">
+                Buat Akun
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <Link href="/login">
-              <Button variant="outline" className="h-14 rounded-full px-8 text-lg font-bold border-[#A3AED0]/30 text-[#2B3674] hover:bg-white bg-white/50 backdrop-blur-sm">
+            <Link href="/login" className="w-full sm:w-auto">
+              <Button variant="outline" className="w-full sm:w-auto h-12 sm:h-14 rounded-full px-6 sm:px-8 text-base sm:text-lg font-bold border-[#A3AED0]/30 text-[#2B3674] hover:bg-white bg-white/50 backdrop-blur-sm">
                 Lihat Dasbor
               </Button>
             </Link>

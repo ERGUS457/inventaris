@@ -17,6 +17,9 @@ import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/s
 import { SidebarContent } from "./sidebar";
 
 import { ThemeToggle } from "@/components/theme-toggle";
+import { ScanBarcode } from "lucide-react";
+import QRScanner from "@/components/qr-scanner";
+import { toast } from "sonner";
 
 export interface HeaderProps {
   userEmail: string;
@@ -26,6 +29,7 @@ export interface HeaderProps {
 export function Header({ userEmail, userRole }: HeaderProps) {
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [showScanner, setShowScanner] = useState(false);
 
   const initials = userEmail
     .split("@")[0]
@@ -37,6 +41,30 @@ export function Header({ userEmail, userRole }: HeaderProps) {
     await supabase.auth.signOut();
     router.push("/login");
     router.refresh();
+  }
+
+  async function handleScanSuccess(decodedText: string) {
+    setShowScanner(false);
+    toast.loading("Mencari barang...", { id: "scan-toast" });
+    
+    const supabase = createClient();
+    const { data: item, error } = await supabase
+      .from("items")
+      .select("*, categories(name), locations(name)")
+      .eq("item_code", decodedText)
+      .single();
+      
+    if (error || !item) {
+      toast.error(`Aset dengan kode ${decodedText} tidak ditemukan.`, { id: "scan-toast" });
+      return;
+    }
+    
+    // In a real app, this might route to a detail page or open a modal. 
+    // Here we'll just show a detailed toast.
+    toast.success(`Aset Ditemukan: ${item.name}`, { 
+      id: "scan-toast",
+      description: `Kategori: ${item.categories?.name ?? '-'} | Lokasi: ${item.locations?.name ?? '-'} | Stok: ${item.quantity}`
+    });
   }
 
   return (
@@ -69,7 +97,18 @@ export function Header({ userEmail, userRole }: HeaderProps) {
       {/* Spacer */}
       <div className="flex-1" />
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 sm:gap-4">
+        {/* Scan Barcode Button */}
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          onClick={() => setShowScanner(true)}
+          className="text-[#A3AED0] hover:text-[#4318FF] dark:hover:text-white"
+          title="Scan QR/Barcode"
+        >
+          <ScanBarcode className="h-5 w-5" />
+        </Button>
+
         {/* Theme Toggle */}
         <ThemeToggle />
 
@@ -119,6 +158,13 @@ export function Header({ userEmail, userRole }: HeaderProps) {
         </DropdownMenuContent>
         </DropdownMenu>
       </div>
+
+      {showScanner && (
+        <QRScanner 
+          onScanSuccess={handleScanSuccess} 
+          onClose={() => setShowScanner(false)} 
+        />
+      )}
     </header>
   );
 }

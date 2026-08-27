@@ -47,32 +47,32 @@ export function UsersTable({ initialData, currentUserId }: UsersTableProps) {
   }
 
   return (
-    <Card className="rounded-[20px] border-none bg-white p-6 shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)]">
+    <Card className="rounded-[20px] border-none bg-white dark:bg-[#111c44] p-6 shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)] dark:shadow-none">
       <div className="overflow-x-auto">
         <Table>
           <TableHeader>
-            <TableRow className="border-b border-gray-100">
-              <TableHead className="font-bold text-[#A3AED0]">Email</TableHead>
-              <TableHead className="font-bold text-[#A3AED0]">Perusahaan</TableHead>
-              <TableHead className="font-bold text-[#A3AED0]">Terdaftar Pada</TableHead>
-              <TableHead className="font-bold text-[#A3AED0]">Role</TableHead>
-              <TableHead className="font-bold text-[#A3AED0]">Akses Superadmin</TableHead>
-              <TableHead className="font-bold text-[#A3AED0] text-right">Verifikasi Login</TableHead>
+            <TableRow className="border-b border-[#F4F7FE] dark:border-white/5 hover:bg-transparent">
+              <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Email</TableHead>
+              <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Perusahaan</TableHead>
+              <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Terdaftar Pada</TableHead>
+              <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Role</TableHead>
+              <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Akses Superadmin</TableHead>
+              <TableHead className="font-bold text-[#A3AED0] dark:text-white/70 text-right">Verifikasi Login</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {initialData.map((profile) => (
-              <TableRow key={profile.id} className="border-b border-gray-50">
-                <TableCell className="font-bold text-[#2B3674]">
+              <TableRow key={profile.id} className="border-b border-[#F4F7FE] dark:border-white/5 hover:bg-[#F4F7FE]/50 dark:hover:bg-white/5 transition-colors">
+                <TableCell className="font-bold text-[#2B3674] dark:text-white">
                   {profile.email}
                   {profile.id === currentUserId && (
-                    <span className="ml-2 text-xs font-normal text-[#A3AED0]">(Anda)</span>
+                    <span className="ml-2 text-xs font-normal text-[#A3AED0] dark:text-white/50">(Anda)</span>
                   )}
                 </TableCell>
-                <TableCell className="text-[#2B3674] font-medium">
+                <TableCell className="text-[#2B3674] dark:text-white/90 font-medium">
                   {profile.company_name || "-"}
                 </TableCell>
-                <TableCell className="text-[#2B3674] font-medium">
+                <TableCell className="text-[#2B3674] dark:text-white/90 font-medium">
                   {format(new Date(profile.created_at), "dd MMM yyyy, HH:mm", { locale: id })}
                 </TableCell>
                 <TableCell>
@@ -80,8 +80,8 @@ export function UsersTable({ initialData, currentUserId }: UsersTableProps) {
                     variant="outline" 
                     className={
                       profile.role === "superadmin"
-                        ? "bg-purple-50 text-purple-600 border-purple-200"
-                        : "bg-gray-50 text-gray-600 border-gray-200"
+                        ? "bg-purple-50 text-purple-600 border-purple-200 dark:bg-purple-500/10 dark:text-purple-400 dark:border-purple-500/20"
+                        : "bg-gray-50 text-gray-600 border-gray-200 dark:bg-white/10 dark:text-white/70 dark:border-white/20"
                     }
                   >
                     {profile.role.toUpperCase()}
@@ -96,7 +96,7 @@ export function UsersTable({ initialData, currentUserId }: UsersTableProps) {
                 </TableCell>
                 <TableCell className="text-right">
                   <div className="flex items-center justify-end gap-2">
-                    <span className="text-sm font-medium text-[#2B3674]">
+                    <span className="text-sm font-medium text-[#2B3674] dark:text-white">
                       {profile.is_verified ? "Terverifikasi" : "Menunggu"}
                     </span>
                     <Switch 

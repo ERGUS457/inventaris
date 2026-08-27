@@ -28,8 +28,8 @@ export default async function UsersPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-[#2B3674]">Manajemen Pengguna</h1>
-          <p className="text-[#A3AED0] mt-1">Verifikasi dan atur peran (role) pengguna aplikasi Anda.</p>
+          <h1 className="text-3xl font-bold tracking-tight text-[#2B3674] dark:text-white">Manajemen Pengguna</h1>
+          <p className="text-[#A3AED0] dark:text-white/70 mt-1">Verifikasi dan atur peran (role) pengguna aplikasi Anda.</p>
         </div>
       </div>
 

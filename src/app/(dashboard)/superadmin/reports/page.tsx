@@ -173,12 +173,12 @@ export default function SuperadminReportsPage() {
       </div>
 
       {/* Results */}
-      <div className="rounded-[20px] bg-white p-6 shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)]">
+      <div className="rounded-[20px] bg-white dark:bg-[#111c44] p-6 shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)] dark:shadow-none border-none">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-[#2B3674]">
+          <h2 className="text-xl font-bold text-[#2B3674] dark:text-white">
             {reportType === "items" ? "Daftar Aset" : "Riwayat Transaksi"}
           </h2>
-          <Badge variant="outline" className="bg-[#F4F7FE] text-[#4318FF] border-[#4318FF]/20">
+          <Badge variant="outline" className="bg-[#F4F7FE] dark:bg-white/10 text-[#4318FF] dark:text-[#868CFF] border-[#4318FF]/20 dark:border-white/10">
             {data.length} data
           </Badge>
         </div>
@@ -197,7 +197,7 @@ export default function SuperadminReportsPage() {
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
-                <TableRow className="border-b border-gray-100">
+                <TableRow className="border-b border-[#F4F7FE] dark:border-white/5 hover:bg-transparent">
                   <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Kode</TableHead>
                   <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Nama Aset</TableHead>
                   <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Pemilik</TableHead>
@@ -209,7 +209,7 @@ export default function SuperadminReportsPage() {
               </TableHeader>
               <TableBody>
                 {data.map((item) => (
-                  <TableRow key={item.id} className="border-b border-gray-50 dark:border-white/5">
+                  <TableRow key={item.id} className="border-b border-[#F4F7FE] dark:border-white/5 hover:bg-[#F4F7FE]/50 dark:hover:bg-white/5 transition-colors">
                     <TableCell className="font-mono text-sm text-[#A3AED0] dark:text-white/70">{item.item_code}</TableCell>
                     <TableCell className="font-bold text-[#2B3674] dark:text-white">{item.name}</TableCell>
                     <TableCell className="text-sm text-[#A3AED0] dark:text-white/70">{item.profiles?.email ?? "-"}</TableCell>
@@ -239,27 +239,27 @@ export default function SuperadminReportsPage() {
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
-                <TableRow className="border-b border-gray-100">
-                  <TableHead className="font-bold text-[#A3AED0]">Tanggal</TableHead>
-                  <TableHead className="font-bold text-[#A3AED0]">Aset</TableHead>
-                  <TableHead className="font-bold text-[#A3AED0]">Pemilik</TableHead>
-                  <TableHead className="font-bold text-[#A3AED0]">Tipe</TableHead>
-                  <TableHead className="font-bold text-[#A3AED0] text-center">Qty</TableHead>
-                  <TableHead className="font-bold text-[#A3AED0]">Catatan</TableHead>
+                <TableRow className="border-b border-[#F4F7FE] dark:border-white/5 hover:bg-transparent">
+                  <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Tanggal</TableHead>
+                  <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Aset</TableHead>
+                  <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Pemilik</TableHead>
+                  <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Tipe</TableHead>
+                  <TableHead className="font-bold text-[#A3AED0] dark:text-white/70 text-center">Qty</TableHead>
+                  <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Catatan</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {data.map((tx) => (
-                  <TableRow key={tx.id} className="border-b border-gray-50">
-                    <TableCell className="text-sm text-[#A3AED0]">
+                  <TableRow key={tx.id} className="border-b border-[#F4F7FE] dark:border-white/5 hover:bg-[#F4F7FE]/50 dark:hover:bg-white/5 transition-colors">
+                    <TableCell className="text-sm text-[#A3AED0] dark:text-white/70">
                       {new Date(tx.transaction_date).toLocaleDateString("id-ID", {
                         day: "numeric",
                         month: "short",
                         year: "numeric",
                       })}
                     </TableCell>
-                    <TableCell className="font-bold text-[#2B3674]">{tx.items?.name ?? "-"}</TableCell>
-                    <TableCell className="text-sm text-[#A3AED0]">{tx.profiles?.email ?? "-"}</TableCell>
+                    <TableCell className="font-bold text-[#2B3674] dark:text-white">{tx.items?.name ?? "-"}</TableCell>
+                    <TableCell className="text-sm text-[#A3AED0] dark:text-white/70">{tx.profiles?.email ?? "-"}</TableCell>
                     <TableCell>
                       <span
                         className={`inline-flex items-center rounded-lg px-3 py-1 text-xs font-bold ${
@@ -273,8 +273,8 @@ export default function SuperadminReportsPage() {
                         {tx.transaction_type === "masuk" ? "MASUK" : tx.transaction_type === "mutasi" ? "MUTASI" : "KELUAR"}
                       </span>
                     </TableCell>
-                    <TableCell className="text-center font-bold text-[#2B3674]">{tx.quantity}</TableCell>
-                    <TableCell className="text-sm text-[#A3AED0] max-w-[200px] truncate">{tx.notes ?? "-"}</TableCell>
+                    <TableCell className="text-center font-bold text-[#2B3674] dark:text-white">{tx.quantity}</TableCell>
+                    <TableCell className="text-sm text-[#A3AED0] dark:text-white/70 max-w-[200px] truncate">{tx.notes ?? "-"}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

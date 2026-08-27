@@ -191,14 +191,14 @@ export default async function SuperadminPage() {
 
       {/* ── Pending Users Preview ────────────────────────── */}
       {pendingUsers.length > 0 && (
-        <div className="rounded-[20px] bg-white p-6 shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)]">
+        <div className="rounded-[20px] bg-white dark:bg-[#111c44] p-6 shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)] dark:shadow-none border-none">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-[#2B3674]">
+            <h2 className="text-xl font-bold text-[#2B3674] dark:text-white">
               Menunggu Verifikasi
             </h2>
             <Link
               href="/users"
-              className="text-sm font-bold text-[#4318FF] hover:underline flex items-center gap-1"
+              className="text-sm font-bold text-[#4318FF] dark:text-[#868CFF] hover:underline flex items-center gap-1"
             >
               Lihat Semua <ArrowRight className="h-4 w-4" />
             </Link>
@@ -207,14 +207,14 @@ export default async function SuperadminPage() {
             {pendingUsers.slice(0, 5).map((p) => (
               <div
                 key={p.id}
-                className="flex items-center justify-between rounded-xl bg-[#F4F7FE] px-4 py-3"
+                className="flex items-center justify-between rounded-xl bg-[#F4F7FE] dark:bg-white/5 px-4 py-3"
               >
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100">
-                    <Clock className="h-5 w-5 text-amber-600" />
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-500/20">
+                    <Clock className="h-5 w-5 text-amber-600 dark:text-amber-400" />
                   </div>
                   <div>
-                    <p className="font-bold text-[#2B3674] text-sm">
+                    <p className="font-bold text-[#2B3674] dark:text-white text-sm">
                       {(p as { id: string; company_name?: string }).company_name || "Belum ada nama perusahaan"}
                     </p>
                   </div>

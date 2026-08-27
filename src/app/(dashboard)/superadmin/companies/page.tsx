@@ -94,19 +94,19 @@ export default async function CompaniesPage() {
         >
           ← Kembali ke Pusat Kendali
         </Link>
-        <h1 className="text-3xl font-bold tracking-tight text-[#2B3674]">
+        <h1 className="text-3xl font-bold tracking-tight text-[#2B3674] dark:text-white">
           Pantau Perusahaan
         </h1>
-        <p className="text-[#A3AED0] mt-1">
+        <p className="text-[#A3AED0] dark:text-white/70 mt-1">
           Pilih perusahaan untuk melihat detail inventaris dan data mereka.
         </p>
       </div>
 
       {/* Company Cards */}
       {companies.length === 0 ? (
-        <div className="rounded-[20px] bg-white p-16 text-center shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)]">
-          <Building2 className="h-12 w-12 text-[#A3AED0] mx-auto mb-4" />
-          <p className="text-[#A3AED0] font-medium">Belum ada perusahaan yang terdaftar.</p>
+        <div className="rounded-[20px] bg-white dark:bg-[#111c44] border-none dark:shadow-none p-16 text-center shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)]">
+          <Building2 className="h-12 w-12 text-[#A3AED0] dark:text-white/10 mx-auto mb-4" />
+          <p className="text-[#A3AED0] dark:text-white/50 font-medium">Belum ada perusahaan yang terdaftar.</p>
         </div>
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

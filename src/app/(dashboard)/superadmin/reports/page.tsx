@@ -131,7 +131,11 @@ export default function SuperadminReportsPage() {
               <SelectTrigger className="bg-[#F4F7FE] dark:bg-white/10 dark:text-white border-none h-12 rounded-xl">
                 <div className="flex items-center gap-2">
                   <Building2 className="h-4 w-4 text-[#A3AED0]" />
-                  <SelectValue placeholder="Semua Perusahaan" />
+                  <SelectValue placeholder="Semua Perusahaan">
+                    {selectedCompany === "all" 
+                      ? "Semua Perusahaan" 
+                      : companies.find((c) => c.id === selectedCompany)?.company_name || "Memuat..."}
+                  </SelectValue>
                 </div>
               </SelectTrigger>
               <SelectContent>

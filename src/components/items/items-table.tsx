@@ -185,7 +185,7 @@ export function ItemsTable({ items, categories, locations }: ItemsTableProps) {
             </TableHeader>
             <TableBody>
               {items.map((item) => (
-                <TableRow key={item.id} className="border-b border-[#F4F7FE] hover:bg-[#F4F7FE]/50 transition-colors">
+                <TableRow key={item.id} className="border-b border-[#F4F7FE] dark:border-white/5 hover:bg-[#F4F7FE]/50 dark:hover:bg-white/5 transition-colors">
                   <TableCell className="font-mono text-sm font-bold text-[#A3AED0] py-4">
                     {item.item_code}
                   </TableCell>
@@ -218,21 +218,21 @@ export function ItemsTable({ items, categories, locations }: ItemsTableProps) {
                           </Button>
                         }
                       />
-                      <DropdownMenuContent align="end" className="w-56 rounded-xl">
-                        <DropdownMenuItem onClick={() => setDistributionTarget(item)} className="cursor-pointer font-medium text-[#2B3674] focus:text-[#4318FF] focus:bg-[#F4F7FE]">
+                      <DropdownMenuContent align="end" className="w-[160px] rounded-xl shadow-xl border-slate-100 dark:border-white/10 dark:bg-[#111c44]">
+                        <DropdownMenuItem onClick={() => setDistributionTarget(item)} className="cursor-pointer font-medium text-[#2B3674] dark:text-white focus:text-[#4318FF] dark:focus:text-[#868CFF] focus:bg-[#F4F7FE] dark:focus:bg-white/10">
                           <MapPin className="mr-2 h-4 w-4" />
-                          Detail Penyebaran
+                          Distribusi
                         </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setMutasiTarget(item)} className="cursor-pointer font-medium text-[#2B3674] focus:text-[#4318FF] focus:bg-[#F4F7FE]">
+                        <DropdownMenuItem onClick={() => setMutasiTarget(item)} className="cursor-pointer font-medium text-[#2B3674] dark:text-white focus:text-[#4318FF] dark:focus:text-[#868CFF] focus:bg-[#F4F7FE] dark:focus:bg-white/10">
                           <ArrowRightLeft className="mr-2 h-4 w-4" />
-                          Mutasi Aset
+                          Mutasi Status
                         </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={() => setEditTarget(item)} className="cursor-pointer font-medium text-[#2B3674] focus:text-[#4318FF] focus:bg-[#F4F7FE]">
+                        <DropdownMenuSeparator className="dark:bg-white/10" />
+                        <DropdownMenuItem onClick={() => setEditTarget(item)} className="cursor-pointer font-medium text-[#2B3674] dark:text-white focus:text-[#4318FF] dark:focus:text-[#868CFF] focus:bg-[#F4F7FE] dark:focus:bg-white/10">
                           <Pencil className="mr-2 h-4 w-4" />
                           Edit Aset
                         </DropdownMenuItem>
-                        <DropdownMenuSeparator />
+                        <DropdownMenuSeparator className="dark:bg-white/10" />
                         <DropdownMenuItem
                           variant="destructive"
                           onClick={() => setDeleteTarget(item)}

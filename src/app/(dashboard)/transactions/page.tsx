@@ -73,8 +73,8 @@ export default async function TransactionsPage() {
       {/* Page header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-[#2B3674]">Riwayat Transaksi</h1>
-          <p className="text-[#A3AED0] font-medium text-sm mt-1">
+          <h1 className="text-3xl font-bold tracking-tight text-[#2B3674] dark:text-white">Riwayat Transaksi</h1>
+          <p className="text-[#A3AED0] dark:text-white/70 font-medium text-sm mt-1">
             {transactions.length} transaksi tercatat dalam sistem
           </p>
         </div>
@@ -89,22 +89,22 @@ export default async function TransactionsPage() {
       )}
 
       {/* Transactions list */}
-      <div className="overflow-hidden rounded-[20px] bg-white shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)] px-5 pb-5 pt-2">
+      <div className="overflow-hidden rounded-[20px] bg-white dark:bg-[#111c44] shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)] dark:shadow-none px-5 pb-5 pt-2 border-none">
         {transactions.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-[#A3AED0]">
-            <ClipboardList className="h-12 w-12 mb-4 text-slate-200" />
+          <div className="flex flex-col items-center justify-center py-20 text-[#A3AED0] dark:text-white/50">
+            <ClipboardList className="h-12 w-12 mb-4 text-slate-200 dark:text-white/10" />
             <p className="text-sm font-medium">Belum ada riwayat transaksi.</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
-                <TableRow className="border-b border-[#F4F7FE] hover:bg-transparent">
-                  <TableHead className="w-[180px] text-[#A3AED0] font-bold py-4">Tanggal</TableHead>
-                  <TableHead className="text-[#A3AED0] font-bold py-4">Aset</TableHead>
-                  <TableHead className="text-[#A3AED0] font-bold py-4">Tipe</TableHead>
-                  <TableHead className="text-center w-[100px] text-[#A3AED0] font-bold py-4">Jumlah</TableHead>
-                  <TableHead className="text-[#A3AED0] font-bold py-4">Catatan</TableHead>
+                <TableRow className="border-b border-[#F4F7FE] dark:border-white/5 hover:bg-transparent">
+                  <TableHead className="w-[180px] text-[#A3AED0] dark:text-white/70 font-bold py-4">Tanggal</TableHead>
+                  <TableHead className="text-[#A3AED0] dark:text-white/70 font-bold py-4">Aset</TableHead>
+                  <TableHead className="text-[#A3AED0] dark:text-white/70 font-bold py-4">Tipe</TableHead>
+                  <TableHead className="text-center w-[100px] text-[#A3AED0] dark:text-white/70 font-bold py-4">Jumlah</TableHead>
+                  <TableHead className="text-[#A3AED0] dark:text-white/70 font-bold py-4">Catatan</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -113,14 +113,14 @@ export default async function TransactionsPage() {
                   const isMutasi = tx.transaction_type === "mutasi";
 
                   return (
-                    <TableRow key={tx.id} className="border-b border-[#F4F7FE] hover:bg-[#F4F7FE]/50 transition-colors">
-                      <TableCell className="text-sm font-medium text-[#A3AED0] py-4">
+                    <TableRow key={tx.id} className="border-b border-[#F4F7FE] dark:border-white/5 hover:bg-[#F4F7FE]/50 dark:hover:bg-white/5 transition-colors">
+                      <TableCell className="text-sm font-medium text-[#A3AED0] dark:text-white/70 py-4">
                         {formatDate(tx.transaction_date)}
                       </TableCell>
                       <TableCell className="py-4">
                         <div className="flex flex-col">
-                          <span className="font-bold text-[#2B3674]">{tx.items?.name ?? "—"}</span>
-                          <span className="text-xs font-mono text-[#A3AED0] mt-0.5">
+                          <span className="font-bold text-[#2B3674] dark:text-white">{tx.items?.name ?? "—"}</span>
+                          <span className="text-xs font-mono text-[#A3AED0] dark:text-white/50 mt-0.5">
                             {tx.items?.item_code}
                           </span>
                         </div>
@@ -145,14 +145,14 @@ export default async function TransactionsPage() {
                           {isMasuk ? "MASUK" : isMutasi ? "MUTASI" : "KELUAR"}
                         </span>
                       </TableCell>
-                      <TableCell className="text-center font-bold text-[#2B3674] py-4">
+                      <TableCell className="text-center font-bold text-[#2B3674] dark:text-white py-4">
                         {tx.quantity}
                       </TableCell>
-                      <TableCell className="text-[#A3AED0] text-sm font-medium py-4">
+                      <TableCell className="text-[#A3AED0] dark:text-white/70 text-sm font-medium py-4">
                         {isMutasi && tx.from_location && tx.to_location && (
-                          <div className="flex items-center gap-1.5 text-[#2B3674] font-bold text-xs mb-1 bg-[#F4F7FE] w-max px-2 py-1 rounded-md">
+                          <div className="flex items-center gap-1.5 text-[#2B3674] dark:text-white font-bold text-xs mb-1 bg-[#F4F7FE] dark:bg-white/10 w-max px-2 py-1 rounded-md">
                             <span>{tx.from_location.name}</span>
-                            <ArrowRightLeft className="h-3 w-3 text-[#4318FF]" />
+                            <ArrowRightLeft className="h-3 w-3 text-[#4318FF] dark:text-[#868CFF]" />
                             <span>{tx.to_location.name}</span>
                           </div>
                         )}

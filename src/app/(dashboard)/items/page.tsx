@@ -62,8 +62,8 @@ export default async function ItemsPage() {
       {/* Page header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-slate-800">Data Aset</h1>
-          <p className="text-slate-500 font-medium text-sm mt-1">
+          <h1 className="text-3xl font-bold tracking-tight text-slate-800 dark:text-white">Data Aset</h1>
+          <p className="text-slate-500 dark:text-slate-400 font-medium text-sm mt-1">
             {safeItems.length} aset terdaftar dalam sistem
           </p>
         </div>

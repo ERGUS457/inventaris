@@ -109,26 +109,26 @@ export default function SuperadminReportsPage() {
         >
           ← Kembali ke Pusat Kendali
         </Link>
-        <h1 className="text-3xl font-bold tracking-tight text-[#2B3674]">
+        <h1 className="text-3xl font-bold tracking-tight text-[#2B3674] dark:text-white">
           Laporan Global
         </h1>
-        <p className="text-[#A3AED0] mt-1">
+        <p className="text-[#A3AED0] dark:text-white/70 mt-1">
           Filter laporan berdasarkan perusahaan dan jenis data.
         </p>
       </div>
 
       {/* Filters */}
-      <div className="rounded-[20px] bg-white p-6 shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)]">
+      <div className="rounded-[20px] bg-white dark:bg-[#111c44] p-6 shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)] dark:shadow-none">
         <div className="flex items-center gap-2 mb-4">
           <Filter className="h-5 w-5 text-[#A3AED0]" />
-          <h2 className="font-bold text-[#2B3674]">Filter Laporan</h2>
+          <h2 className="font-bold text-[#2B3674] dark:text-white">Filter Laporan</h2>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           {/* Company Filter */}
           <div className="space-y-2">
-            <label className="text-sm font-bold text-[#2B3674]">Perusahaan</label>
+            <label className="text-sm font-bold text-[#2B3674] dark:text-white">Perusahaan</label>
             <Select value={selectedCompany} onValueChange={(val) => setSelectedCompany(val || "all")}>
-              <SelectTrigger className="bg-[#F4F7FE] border-none h-12 rounded-xl">
+              <SelectTrigger className="bg-[#F4F7FE] dark:bg-white/10 dark:text-white border-none h-12 rounded-xl">
                 <div className="flex items-center gap-2">
                   <Building2 className="h-4 w-4 text-[#A3AED0]" />
                   <SelectValue placeholder="Semua Perusahaan" />
@@ -147,9 +147,9 @@ export default function SuperadminReportsPage() {
 
           {/* Report Type */}
           <div className="space-y-2">
-            <label className="text-sm font-bold text-[#2B3674]">Jenis Laporan</label>
+            <label className="text-sm font-bold text-[#2B3674] dark:text-white">Jenis Laporan</label>
             <Select value={reportType} onValueChange={(val) => setReportType((val || "items") as ReportType)}>
-              <SelectTrigger className="bg-[#F4F7FE] border-none h-12 rounded-xl">
+              <SelectTrigger className="bg-[#F4F7FE] dark:bg-white/10 dark:text-white border-none h-12 rounded-xl">
                 <div className="flex items-center gap-2">
                   <FileBarChart className="h-4 w-4 text-[#A3AED0]" />
                   <SelectValue />
@@ -189,8 +189,8 @@ export default function SuperadminReportsPage() {
             <p className="font-medium">Memuat data...</p>
           </div>
         ) : data.length === 0 ? (
-          <div className="text-center py-16 text-[#A3AED0]">
-            <FileBarChart className="h-12 w-12 mx-auto mb-3 text-slate-200" />
+          <div className="text-center py-16 text-[#A3AED0] dark:text-white/50">
+            <FileBarChart className="h-12 w-12 mx-auto mb-3 text-slate-200 dark:text-white/10" />
             <p className="font-medium">Tidak ada data ditemukan untuk filter ini.</p>
           </div>
         ) : reportType === "items" ? (
@@ -198,24 +198,24 @@ export default function SuperadminReportsPage() {
             <Table>
               <TableHeader>
                 <TableRow className="border-b border-gray-100">
-                  <TableHead className="font-bold text-[#A3AED0]">Kode</TableHead>
-                  <TableHead className="font-bold text-[#A3AED0]">Nama Aset</TableHead>
-                  <TableHead className="font-bold text-[#A3AED0]">Pemilik</TableHead>
-                  <TableHead className="font-bold text-[#A3AED0]">Kategori</TableHead>
-                  <TableHead className="font-bold text-[#A3AED0]">Lokasi</TableHead>
-                  <TableHead className="font-bold text-[#A3AED0] text-center">Qty</TableHead>
-                  <TableHead className="font-bold text-[#A3AED0]">Kondisi</TableHead>
+                  <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Kode</TableHead>
+                  <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Nama Aset</TableHead>
+                  <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Pemilik</TableHead>
+                  <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Kategori</TableHead>
+                  <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Lokasi</TableHead>
+                  <TableHead className="font-bold text-[#A3AED0] dark:text-white/70 text-center">Qty</TableHead>
+                  <TableHead className="font-bold text-[#A3AED0] dark:text-white/70">Kondisi</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {data.map((item) => (
-                  <TableRow key={item.id} className="border-b border-gray-50">
-                    <TableCell className="font-mono text-sm text-[#A3AED0]">{item.item_code}</TableCell>
-                    <TableCell className="font-bold text-[#2B3674]">{item.name}</TableCell>
-                    <TableCell className="text-sm text-[#A3AED0]">{item.profiles?.email ?? "-"}</TableCell>
-                    <TableCell className="text-[#2B3674]">{item.categories?.name ?? "-"}</TableCell>
-                    <TableCell className="text-[#2B3674]">{item.locations?.name ?? "-"}</TableCell>
-                    <TableCell className="text-center font-bold text-[#2B3674]">{item.quantity}</TableCell>
+                  <TableRow key={item.id} className="border-b border-gray-50 dark:border-white/5">
+                    <TableCell className="font-mono text-sm text-[#A3AED0] dark:text-white/70">{item.item_code}</TableCell>
+                    <TableCell className="font-bold text-[#2B3674] dark:text-white">{item.name}</TableCell>
+                    <TableCell className="text-sm text-[#A3AED0] dark:text-white/70">{item.profiles?.email ?? "-"}</TableCell>
+                    <TableCell className="text-[#2B3674] dark:text-white/90">{item.categories?.name ?? "-"}</TableCell>
+                    <TableCell className="text-[#2B3674] dark:text-white/90">{item.locations?.name ?? "-"}</TableCell>
+                    <TableCell className="text-center font-bold text-[#2B3674] dark:text-white">{item.quantity}</TableCell>
                     <TableCell>
                       <Badge
                         variant="outline"

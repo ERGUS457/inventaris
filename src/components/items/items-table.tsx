@@ -97,7 +97,7 @@ export function ItemsTable({ items, categories, locations }: ItemsTableProps) {
 
   if (items.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-16 text-[#A3AED0] border-none rounded-[20px] bg-white shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)]">
+      <div className="flex flex-col items-center justify-center py-16 text-[#A3AED0] dark:text-white/50 border-none rounded-[20px] bg-white dark:bg-[#111c44] shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)] dark:shadow-none">
         <p className="text-sm font-medium">Belum ada data aset di tabel ini.</p>
       </div>
     );
@@ -169,33 +169,33 @@ export function ItemsTable({ items, categories, locations }: ItemsTableProps) {
         </AlertDialogContent>
       </AlertDialog>
 
-      <div className="overflow-hidden rounded-[20px] bg-white shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)] border-none px-5 pb-5 pt-2">
+      <div className="overflow-hidden rounded-[20px] bg-white dark:bg-[#111c44] shadow-[14px_17px_40px_4px_rgba(112,144,176,0.08)] dark:shadow-none border-none px-5 pb-5 pt-2">
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
-              <TableRow className="border-b border-[#F4F7FE] hover:bg-transparent">
-                <TableHead className="w-[120px] text-[#A3AED0] font-bold py-4">Kode</TableHead>
-                <TableHead className="text-[#A3AED0] font-bold py-4">Nama Aset</TableHead>
-                <TableHead className="text-[#A3AED0] font-bold py-4">Kategori</TableHead>
-                <TableHead className="text-[#A3AED0] font-bold py-4">Lokasi</TableHead>
-                <TableHead className="text-center w-[100px] text-[#A3AED0] font-bold py-4">Jumlah</TableHead>
-                <TableHead className="w-[130px] text-[#A3AED0] font-bold py-4">Kondisi</TableHead>
+              <TableRow className="border-b border-[#F4F7FE] dark:border-white/5 hover:bg-transparent">
+                <TableHead className="w-[120px] text-[#A3AED0] dark:text-white/70 font-bold py-4">Kode</TableHead>
+                <TableHead className="text-[#A3AED0] dark:text-white/70 font-bold py-4">Nama Aset</TableHead>
+                <TableHead className="text-[#A3AED0] dark:text-white/70 font-bold py-4">Kategori</TableHead>
+                <TableHead className="text-[#A3AED0] dark:text-white/70 font-bold py-4">Lokasi</TableHead>
+                <TableHead className="text-center w-[100px] text-[#A3AED0] dark:text-white/70 font-bold py-4">Jumlah</TableHead>
+                <TableHead className="w-[130px] text-[#A3AED0] dark:text-white/70 font-bold py-4">Kondisi</TableHead>
                 <TableHead className="w-[60px] text-right py-4"></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {items.map((item) => (
                 <TableRow key={item.id} className="border-b border-[#F4F7FE] dark:border-white/5 hover:bg-[#F4F7FE]/50 dark:hover:bg-white/5 transition-colors">
-                  <TableCell className="font-mono text-sm font-bold text-[#A3AED0] py-4">
+                  <TableCell className="font-mono text-sm font-bold text-[#A3AED0] dark:text-white/70 py-4">
                     {item.item_code}
                   </TableCell>
-                  <TableCell className="font-bold text-[#2B3674] py-4">
+                  <TableCell className="font-bold text-[#2B3674] dark:text-white py-4">
                     {item.name}
                   </TableCell>
-                  <TableCell className="text-[#2B3674] font-medium py-4">
+                  <TableCell className="text-[#2B3674] dark:text-white/90 font-medium py-4">
                     {item.categories?.name ?? "—"}
                   </TableCell>
-                  <TableCell className="text-[#2B3674] font-medium py-4">
+                  <TableCell className="text-[#2B3674] dark:text-white/90 font-medium py-4">
                     {item.locations?.name ?? "—"}
                   </TableCell>
                   <TableCell className="text-center font-bold text-[#2B3674] py-4">

@@ -98,16 +98,18 @@ export function Header({ userEmail, userRole }: HeaderProps) {
       <div className="flex-1" />
 
       <div className="flex items-center gap-2 sm:gap-4">
-        {/* Scan Barcode Button */}
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          onClick={() => setShowScanner(true)}
-          className="text-[#A3AED0] hover:text-[#4318FF] dark:hover:text-white"
-          title="Scan QR/Barcode"
-        >
-          <ScanBarcode className="h-5 w-5" />
-        </Button>
+        {/* Scan Barcode Button (Hidden for Superadmin) */}
+        {userRole !== "superadmin" && (
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={() => setShowScanner(true)}
+            className="text-[#A3AED0] hover:text-[#4318FF] dark:hover:text-white"
+            title="Scan QR/Barcode"
+          >
+            <ScanBarcode className="h-5 w-5" />
+          </Button>
+        )}
 
         {/* Theme Toggle */}
         <ThemeToggle />

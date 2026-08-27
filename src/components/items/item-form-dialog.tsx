@@ -4,9 +4,10 @@ import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Loader2, Plus } from "lucide-react";
+import { Loader2, Plus, ScanBarcode } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import QRScanner from "@/components/qr-scanner";
 
 import { createClient } from "@/lib/supabase/client";
 import { type Item, type Category, type Location, type ItemCondition } from "@/lib/types";
@@ -85,6 +86,7 @@ export function ItemFormDialog({
   const router = useRouter();
   const [open, setOpen] = useState(defaultOpen);
   const [isPending, startTransition] = useTransition();
+  const [showScanner, setShowScanner] = useState(false);
 
   const isEditMode = !!item;
 
@@ -202,7 +204,19 @@ export function ItemFormDialog({
                   <FormItem>
                     <FormLabel>Kode Aset</FormLabel>
                     <FormControl>
-                      <Input placeholder="AST-001" {...field} />
+                      <div className="flex gap-2">
+                        <Input placeholder="AST-001" {...field} />
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="icon"
+                          onClick={() => setShowScanner(true)}
+                          className="shrink-0"
+                          title="Scan Barcode"
+                        >
+                          <ScanBarcode className="h-4 w-4" />
+                        </Button>
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -371,6 +385,16 @@ export function ItemFormDialog({
           </form>
         </Form>
       </DialogContent>
+      {showScanner && (
+        <QRScanner
+          onScanSuccess={(decodedText) => {
+            form.setValue("item_code", decodedText);
+            setShowScanner(false);
+            toast.success("Barcode berhasil di-scan!");
+          }}
+          onClose={() => setShowScanner(false)}
+        />
+      )}
     </Dialog>
   );
 }

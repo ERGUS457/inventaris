@@ -29,6 +29,31 @@ export default async function PrintReportPage({
     year: "numeric",
   });
 
+  const { data: { user } } = await supabase.auth.getUser();
+
+  let companyName = "Perusahaan Anda";
+  let initials = "PA";
+  let userEmail = "admin@perusahaan.com";
+  
+  if (user) {
+    userEmail = user.email || userEmail;
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("company_name")
+      .eq("id", user.id)
+      .single();
+      
+    if (profile?.company_name) {
+      companyName = profile.company_name;
+      // Ciptakan inisial dari nama perusahaan, abaikan "PT" 
+      const cleanName = companyName.replace(/PT\.?\s*/i, '').trim();
+      const words = cleanName.split(" ").filter(Boolean);
+      initials = words.length > 1 
+        ? (words[0][0] + words[1][0]).toUpperCase()
+        : (words[0] ? words[0].substring(0, 2).toUpperCase() : "PA");
+    }
+  }
+
   let dataTitle = "";
   let tableHeaders: string[] = [];
   let tableRows: string[][] = [];
@@ -100,16 +125,16 @@ export default async function PrintReportPage({
         {/* Kop Surat (Letterhead) */}
         <div className="flex items-center gap-6 border-b-4 border-black pb-6 mb-6">
           <div className="flex-shrink-0 h-24 w-24 bg-blue-700 flex items-center justify-center rounded-lg text-white font-bold text-4xl">
-            SA
+            {initials}
           </div>
           <div className="flex-1 text-center pr-24">
-            <h1 className="text-2xl font-black uppercase tracking-wider">PT. Sejahtera Abadi</h1>
+            <h1 className="text-2xl font-black uppercase tracking-wider">{companyName}</h1>
             <p className="text-sm font-medium mt-1">
-              Gedung Perkantoran Sudirman Lt. 12, Jl. Jend. Sudirman Kav. 1<br />
-              Jakarta Selatan, 12190 - Indonesia
+              Dokumen Laporan Sistem Inventaris<br />
+              Dihasilkan otomatis oleh sistem
             </p>
             <p className="text-sm">
-              Telp: (021) 555-0198 | Email: info@sejahtera-abadi.co.id
+              Email: {userEmail}
             </p>
           </div>
         </div>

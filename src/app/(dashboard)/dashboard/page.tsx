@@ -37,6 +37,19 @@ function formatDate(dateString: string) {
 
 export default async function DashboardPage() {
   const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  let companyName = "Perusahaan Anda";
+  if (user) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("company_name")
+      .eq("id", user.id)
+      .single();
+    if (profile?.company_name) {
+      companyName = profile.company_name;
+    }
+  }
 
   const { data: items } = await supabase.from("items").select("id, condition");
   const { data: recentTransactions } = await supabase
@@ -94,7 +107,7 @@ export default async function DashboardPage() {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="mb-2 text-sm font-bold uppercase tracking-widest text-[#E0E5F2]">
-              PT. Sejahtera Abadi
+              {companyName}
             </p>
             <h1 className="text-4xl font-extrabold tracking-tight">
               Dashboard Inventaris
